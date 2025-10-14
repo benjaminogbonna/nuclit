@@ -1,0 +1,138 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+*.env
+.env.*
+.env
+.venv
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# pipenv
+*.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery task queue
+celerybeat-schedule
+celerybeat.pid
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask/Django instance folder
+instance/
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# Pytest
+.cache/
+*.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+*.mo
+*.pot
+
+
+# Data Science / AI/ML data files
+*.csv
+*.tsv
+*.h5
+*.hdf5
+#*.db
+*.sqlite
+#*.pkl
+# *.joblib
+*.model
+*.ckpt
+*.weights
+*.pb
+*.pth
+*.pt
+*.onnx
+*.tflite
+
+# TensorBoard log files
+logs/
+
+# Model directories
+# models/
+saved_models/
+
+# Large binary or temporary files
+*.tar
+*.tar.gz
+*.zip
+*.tar.bz2
+*.7z
+
+# Result or report files
+*.out
+*.log
+*.bak
+*.swp
+*.temp
+
+# MacOS system files
+.DS_Store
+
+documents/
