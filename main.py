@@ -103,8 +103,11 @@ atexit.register(lambda: scheduler.shutdown())
 def health():
     return {"status": "ok", "message": 'API running'}
 
+environment = os.getenv("ENVIRONMENT")
 
 if __name__ == "__main__":
-    
-    subprocess.Popen(["py", "bot.py"])
+    if environment == 'prod':
+        subprocess.Popen(["python", "bot.py"])
+    else:
+        subprocess.Popen(["py", "bot.py"])
     uvicorn.run('main:app', host="0.0.0.0", port=8000, reload=True)
