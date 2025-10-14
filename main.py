@@ -5,6 +5,11 @@ from google.genai import types
 from fastapi import FastAPI, Request
 from knowledge_base import get_relevant_context
 from bot import bot_main
+import uvicorn
+
+import requests
+from apscheduler.schedulers.background import BackgroundScheduler
+import atexit
 
 from dotenv import load_dotenv
 
@@ -75,6 +80,29 @@ async def ask2(request: Request):
         return {"error": str(e)}
 
 
+# ---------- Health ----------
+
+def scheduler_():
+    try:
+        resp = requests.get(os.environ.get("S_API_URL"), timeout=10)
+        print(f"API call status: {resp.status_code}, response: {resp.text[:100]}")
+    except Exception as e:
+        print(f"Error calling API: {e}")
+
+# Start scheduler when API boots
+scheduler = BackgroundScheduler()
+scheduler.add_job(scheduler_, "interval", minutes=10)
+scheduler.start()
+
+# Ensure scheduler shuts down gracefully
+atexit.register(lambda: scheduler.shutdown())
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "message": 'API running'}
+
+
 if __name__ == "__main__":
     bot_main()
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run('main:app', host="0.0.0.0", port=8000, reload=True)

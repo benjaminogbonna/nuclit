@@ -9,7 +9,7 @@ load_dotenv()
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 environment = os.getenv("ENVIRONMENT")
 if environment == 'prod':
-    BACKEND_URL = "http://localhost:8000/ask"
+    BACKEND_URL = "https://nuclit.onrender.com/ask"
 else:
     BACKEND_URL = "http://localhost:8000/ask"
 
