@@ -4,12 +4,13 @@ from google import genai
 from google.genai import types
 from fastapi import FastAPI, Request
 from knowledge_base import get_relevant_context
-from bot import bot_main
+# from bot import bot_main
 import uvicorn
 
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
+import subprocess
 
 from dotenv import load_dotenv
 
@@ -104,5 +105,6 @@ def health():
 
 
 if __name__ == "__main__":
-    bot_main()
+    
+    subprocess.Popen(["py", "bot.py"])
     uvicorn.run('main:app', host="0.0.0.0", port=8000, reload=True)

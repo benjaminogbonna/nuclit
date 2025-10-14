@@ -6,11 +6,12 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 
 load_dotenv()
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 environment = os.getenv("ENVIRONMENT")
 if environment == 'prod':
+    TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
     BACKEND_URL = "https://nuclit.onrender.com/ask"
 else:
+    TELEGRAM_TOKEN = os.getenv("TELEGRAM_DEV_TOKEN")
     BACKEND_URL = "http://localhost:8000/ask"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -35,13 +36,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=chat_id, text=answer)
 
 def bot_main():
-    app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+    bot_app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    bot_app.add_handler(CommandHandler("start", start))
+    bot_app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
     print("Bot is running...")
-    app.run_polling()
+    bot_app.run_polling()
 
-# if __name__ == "__main__":
-#     bot_main()
+if __name__ == "__main__":
+    bot_main()
