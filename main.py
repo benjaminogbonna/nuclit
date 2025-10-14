@@ -4,6 +4,7 @@ from google import genai
 from google.genai import types
 from fastapi import FastAPI, Request
 from knowledge_base import get_relevant_context
+from bot import bot_main
 
 from dotenv import load_dotenv
 
@@ -75,4 +76,5 @@ async def ask2(request: Request):
 
 
 if __name__ == "__main__":
+    bot_main()
     uvicorn.run(app, host="0.0.0.0", port=8000)
