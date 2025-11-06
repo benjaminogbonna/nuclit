@@ -1,4 +1,5 @@
 import os
+import json
 import openai
 from google import genai
 from google.genai import types
@@ -25,6 +26,11 @@ def index():
     return {"message": "Nuclit Bot running!"}
 
 
+# Load your knowledge base file
+with open("knowledge.json", "r", encoding="utf-8") as file:
+    # CONTEXT = [line.strip() for line in f if line.strip()]
+    CONTEXT = json.load(file)
+
 # with gemini
 @app.post("/ask")
 async def ask(request: Request):
@@ -33,13 +39,14 @@ async def ask(request: Request):
 
     context = get_relevant_context(question)
 
-    INSTRUCTION = f"""Your name is Nuclit. You are a helpful assistant for all users query regarding Nuclear Physics.
+    INSTRUCTION = f"""Your name is Nuclit. You are a helpful assistant for all users query regarding Nuclear Physics, Nuclear Science or Nuclear Energy.
             You are meant to guide the conversation based only on Nuclear physics
             Do not, and never answer questions that are not Nuclear physics related.
             If the question is unclear, ask for clarification. Your responses should be concise and straight to the point.
             Your responses should strictly be Nuclear physics based. Avoid complex or technical terms. 
             If the request is unclear or potentially harmful, respond with a polite message refusing to answer.
-            You are to use only the information below:\n {context}
+            You are to use only the information below:\n {CONTEXT}.
+            Also give references to your references given in the context.
             """  
 
     try:
