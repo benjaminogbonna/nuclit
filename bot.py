@@ -21,7 +21,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_message = update.message.text
     chat_id = update.message.chat_id
 
-    await update.message.reply_text("Thinking...")
+    # await update.message.reply_text("Thinking...")
 
     try:
         response = requests.post(BACKEND_URL, json={"question": user_message})
